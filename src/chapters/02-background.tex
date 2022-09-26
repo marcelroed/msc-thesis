@@ -8,9 +8,9 @@
     A partial differential equation (PDE) is a set of constraints on the partial derivatives of an underlying function, often parameterized in terms of a different function.
     PDEs often take the form of expressions using their $n$th order partial derivatives, with some examples following in the table below.
     \todo{table of a few well known PDEs}
-    Formulating a PDE is implicitly asking ``what are the functions that satisfy these constraints?''
-    The heat equation is a classic example of a PDE that shows up in many domains, and is the main PDE we will study in this thesis.
-    Developed by Fourier in the early 18th century [cite], the purpose of the differential equation was to study the transfer of heat, but it has found uses in studying particle flows, Brownian motion and economics.
+    The process of solving a PDE is ``what are the functions that satisfy these constraints?''
+    The heat equation, also known as the diffusion equation, is a classic example of a PDE that shows up in many domains, and will be used in the  we will study in this thesis.
+    Developed by Joseph Fourier in the early 18th century~\cite{narasimhanFourierHeatConduction1999}, the purpose of the differential equation was to study the transfer of heat, but it has found uses in a broad spectrum of applications, e.g.\ studying particle dynamics, quantum mechanics and economics.
     Importantly,
 
     A somewhat general yet intuitive description of diffusion would be the flow of ``substance'' from high levels to lower levels at a rate that is proportional to the gradient of the level of substance at a given area (for the heat equation, substitute substance for temperature, and flow of substance for heat).
@@ -20,8 +20,8 @@
         \parpar ut = \alpha\delta u,\label{eq:basic-heat}
     \end{equation}
 
-    for our ``substance'' function $u(x, t)$, (thermal) diffusivity constant $\alpha$, where $\delta = \nabla^2$ is the Laplacian.
-    To understand why the expression uses the Laplacian, often read as curvature, consider the fact that a point at position $x$ at time $t + \epsilon$ for sufficiently small $\epsilon > 0$ will be moved if its
+    for our ``substance'' function $u(x, t)$, (thermal) diffusivity constant $\alpha$, where $\Delta = \nabla^2$ is the Laplacian.
+    To understand why the expression uses the Laplacian, an operator recovering the curvature of a function, consider the fact that a point at position $x$ at time $t + \epsilon$ for sufficiently small $\epsilon > 0$ will be moved if its
     neighboring points are higher than itself is.
     If the gradient is positive in one direction, the flow of heat could be cancelled by a negative gradient in a different direction.
     We need to measure the differences in gradients around the point $x$ at time $t$ to find out the ``substance'' change per unit time at instant $t$.
@@ -32,7 +32,7 @@
         In the diffusion equation, the function value $u(x, t)$ at position $x$ will change over time $t$ toward the values of its surroundings.
     \end{proposition}
 
-    while the equation belies another intuition for what the heat equation is doing:
+    \autoref{eq:basic-heat} belies another intuition for what the heat equation means:
 
     \begin{proposition}\label{prop:diffusion-as-curvature}
         In the diffusion equation, function values change to minimize their spatial curvature.
@@ -117,11 +117,7 @@
         h^{t+1}_v &= U_t(h_v^t, m_v^{t + 1}),\label{eq:mpnn-update}\\
     \end{align}
     where $m^{t+1}_v$ is the message computed for timestep $t + 1$ at node $v$, $N(v)$ is the set of neighbors of $v$, $h^t_x$ is the state of node $x$ at timestep $t$ and $e_{vw}$ is the edge weight from node $v$ to node $w$.
-    $M_t$ and $U_t$ are the message function the node update function at time $t$ respectively.
-
-    A key reason to do
-
-
+    $M_t$ and $U_t$ are the message function and the node update function at time $t$ respectively, and this time variable is usually used as an index for the current layer of a feed-forward neural network.
 
     One could also consider global tasks on
 

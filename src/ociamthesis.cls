@@ -72,7 +72,7 @@
 % CRESTS
 %
 
-\def\crest{{\includegraphics{../fig/beltcrest.pdf}}}
+\def\crest{{\includegraphics{../fig/title/beltcrest.pdf}}}
 
 
 %
@@ -281,7 +281,7 @@
 {\large \vspace*{1ex}
     {{\@college} \par}
 \vspace*{1ex}
-    {supervised by Prof.\ Ian Horrocks and Dr.\ Jiaoyan Chen \par}
+    {supervised by Prof.\ Michael Bronstein \par}
 \vspace*{20mm}
     {{\submittedtext} \par}
 \vspace*{1ex}
