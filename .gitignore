@@ -312,3 +312,7 @@ assets/*.pdf
 out/
 
 previous-dissertations/
+
+src/main.ist
+src/externalized/
+**/__pycache__/
