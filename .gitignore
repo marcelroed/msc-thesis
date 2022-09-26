@@ -309,10 +309,13 @@ TSWLatexianTemp*
 
 assets/*.pdf
 
-out/
+out/**/*
 
 previous-dissertations/
 
 src/main.ist
 src/externalized/
 **/__pycache__/
+
+
+!out/main.pdf
