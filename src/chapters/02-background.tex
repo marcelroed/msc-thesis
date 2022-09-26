@@ -1,0 +1,133 @@
+\documentclass[../main.tex]{subfiles}
+
+% Document
+\begin{document}
+    \chapter{Background}\label{ch:background}
+
+    \section{Diffusion and Partial Differential Equations}\label{sec:diffusion}
+    A partial differential equation (PDE) is a set of constraints on the partial derivatives of an underlying function, often parameterized in terms of a different function.
+    PDEs often take the form of expressions using their $n$th order partial derivatives, with some examples following in the table below.
+    \todo{table of a few well known PDEs}
+    Formulating a PDE is implicitly asking ``what are the functions that satisfy these constraints?''
+    The heat equation is a classic example of a PDE that shows up in many domains, and is the main PDE we will study in this thesis.
+    Developed by Fourier in the early 18th century [cite], the purpose of the differential equation was to study the transfer of heat, but it has found uses in studying particle flows, Brownian motion and economics.
+    Importantly,
+
+    A somewhat general yet intuitive description of diffusion would be the flow of ``substance'' from high levels to lower levels at a rate that is proportional to the gradient of the level of substance at a given area (for the heat equation, substitute substance for temperature, and flow of substance for heat).
+    The basic equation that expresses this is somewhat non-obvious to those who haven't studied it, written as
+
+    \begin{equation}
+        \parpar ut = \alpha\delta u,\label{eq:basic-heat}
+    \end{equation}
+
+    for our ``substance'' function $u(x, t)$, (thermal) diffusivity constant $\alpha$, where $\delta = \nabla^2$ is the Laplacian.
+    To understand why the expression uses the Laplacian, often read as curvature, consider the fact that a point at position $x$ at time $t + \epsilon$ for sufficiently small $\epsilon > 0$ will be moved if its
+    neighboring points are higher than itself is.
+    If the gradient is positive in one direction, the flow of heat could be cancelled by a negative gradient in a different direction.
+    We need to measure the differences in gradients around the point $x$ at time $t$ to find out the ``substance'' change per unit time at instant $t$.
+
+    The description in words above is formulated in \autoref{prop:diffusion-as-heat}:
+
+    \begin{proposition}\label{prop:diffusion-as-heat}
+        In the diffusion equation, the function value $u(x, t)$ at position $x$ will change over time $t$ toward the values of its surroundings.
+    \end{proposition}
+
+    while the equation belies another intuition for what the heat equation is doing:
+
+    \begin{proposition}\label{prop:diffusion-as-curvature}
+        In the diffusion equation, function values change to minimize their spatial curvature.
+    \end{proposition}
+
+    \autoref{prop:diffusion-as-heat} follows closely the standard interpretation of the heat equation.
+    This can be thought of heat or particles flowing from positions where there is more to fill positions which have less.
+    In the absence of sources and drains of heat or particles (referred to as homogeneous systems), we have
+
+    Instead, \autoref{prop:diffusion-as-curvature} can be thought of as minimization of curvature.
+    In this interpretation we are moving each point on the function with a rate proportional to its curvature.
+    A property of the solutions to this differential equation is much more obvious here than in the other interpretation.
+    Namely: when the curvature is zero, ergo the function is locally linear, the function value will stay constant.
+
+%    In all generality, the diffusion equation may be written as
+%    \begin{equation}\label{eq:diffusion-general}
+%    \parpar{\phi(\bm r, t)}t
+%    \end{equation}
+%
+%    For many use-cases, the
+%
+%    % Insert equation
+%    % ,
+%
+%    and this simplification can be interpreted in two key ways.
+
+    \subsection{Numerical Solutions to Partial Differential Equations}\label{subsec:solving-partial-differential-equations}
+
+    There are several ways of solving PDEs, but central to this thesis is Runge-Kutta (RK) methods, the simplest of which being Euler's method.
+
+    Given an initial value problem of the form
+    \begin{equation}
+        \dd yt = f(t, y), \quad y(t_0) = y_0,\label{eq:ivp}
+    \end{equation}
+    we
+
+    \subsubsection{Simple Solvers}\label{subsubsec:simple-solvers}
+    \todo{Write up how simple PDEs can be solved}
+
+    \subsubsection{Stiff Equations}\label{subsubsec:stiff-equations}
+    The methods described above work well for simple functions, but may fail spectacularly when solving PDEs that are expressed in complex functions $f$, for instance when parameterized by a neural network, a case we will come back to in \autoref{subsec:neural-differential-equations} as well as in \autoref{sec:graph-neural-diffusion} and \autoref{sec:the-gradient-flow-framework}.
+    
+
+    \subsubsection{Adaptive Methods and Tricks for Stiff Equations}\label{subsubsec:adaptive-methods}
+    The implementation (see \todo{link section on solving the solver}), the inner workings of these methods is beyond the scope of this thesis.
+
+    In particular use of higher order adaptive~\cite{pressAdaptiveStepsizeRungeKutta1992a} RK methods like Tsitouras 5(4)~\cite{tsitourasRungeKuttaPairs2011} and Dormand Prince 5(4)~\cite{dormandFamilyEmbeddedRungeKutta1980}
+
+    \subsection{Neural Differential Equations}\label{subsec:neural-differential-equations}
+    In his thesis on the matter~\cite{kidgerNeuralDifferentialEquations2022}, Patrick Kidger concisely defines a neural differential equation as ``a differential equation using a neural network to parameterize the vector field''.
+    The canonical example of this is the standard neural ODE
+    \begin{equation}
+        y(0) = y_0 \quad \frac{\mathrm dy}{\mathrm dt}(t) = f_{\theta}(t, y(t)).\label{eq:neural-ode}
+    \end{equation}
+    In this equation, $\theta$ represents the weights of the flow field neural network $f_{\theta}: \R \times \R^{d_1 \times \cdots \times d_k} \to \R^{d_1\times \cdots \times d_k}$.
+
+
+
+    \section{Graph Neural Networks}\label{sec:graph-neural-networks}
+    Graph Neural Network (GNN), is a collective term for neural network architectures that run on graphs as their input data.
+
+    \subsection{Graph Learning Tasks}\label{subsec:graph-learning-tasks}
+    Using graph input, one may consider several prediction tasks.
+    Often, these are separated into which aspects of the graph they are trying to make predictions about.
+    We have
+    \begin{itemize}
+        \item Node-level tasks -- Predict some features per node on the input graph.
+        Often this would be classification of the node features, for instance classifying fake accounts in a social media graph.
+        If we reorder the nodes (the order in which they are organized in the input representation), we expect reordered outputs.
+        \item Edge-level tasks -- Predict features on existing or potential edges on the input graph.
+        This might involve which edges might be missing, or the strength of a relationship.
+        Again, reordering the input graph should appropriately reorder the output of these predictions.
+        \item Graph-level tasks -- Predict features on the entire graph.
+        If our graph is a molecule, we could for instance try to predict material properties.
+        Reordering the nodes and edges should in this instance have no effect on our prediction.
+    \end{itemize}
+
+    \section{Message Passing Neural Networks}\label{sec:message-passing-neural-networks}
+    Message passing neural networks~\cite{gilmerNeuralMessagePassing2017} (MPNNs) are a subclass of graph neural networks that conform to the following equations
+    \begin{align}
+        m^{t+1}_v &= \sum_{w \in N(v)} M_t(h^t_v, h^t_w, e_{vw})\label{eq:mpnn-message}\\
+        h^{t+1}_v &= U_t(h_v^t, m_v^{t + 1}),\label{eq:mpnn-update}\\
+    \end{align}
+    where $m^{t+1}_v$ is the message computed for timestep $t + 1$ at node $v$, $N(v)$ is the set of neighbors of $v$, $h^t_x$ is the state of node $x$ at timestep $t$ and $e_{vw}$ is the edge weight from node $v$ to node $w$.
+    $M_t$ and $U_t$ are the message function the node update function at time $t$ respectively.
+
+    A key reason to do
+
+
+
+    One could also consider global tasks on
+
+    \subsection{Graph Data and Datasets}\label{subsec:graph-datasets}
+    Unlike images or time series data, connections and thus (first order) interactions between features in an input graph are not fixed between graphs, nor are they arbitrary.
+
+
+
+\end{document}

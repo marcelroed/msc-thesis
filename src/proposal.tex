@@ -1,0 +1,113 @@
+%! Author = marcel
+%! Date = 24/04/2022
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage{amsmath}
+
+\usepackage{subfiles}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[super]{nth}
+% \usepackage{biblatex}
+
+% Package options
+\graphicspath{{../fig/}}
+
+
+
+\input{include/macros}
+
+
+\def\crest{{\includegraphics{title/beltcrest.pdf}}}
+\renewcommand{\maketitle}{%
+    \null
+    \renewcommand{\footnotesize}{\small}
+    \renewcommand{\footnoterule}{\relax}
+    \thispagestyle{empty}
+    \begin{center}
+        \vspace*{15mm}
+        { \LARGE {\textsc{University of Oxford}} \par}
+        {\large \vspace*{4mm}}
+        {\large Department of Computer Science \par}
+        {\large \vspace*{10mm} {\crest \par} \vspace*{15mm}}
+        { \LARGE {\bfseries {MSc Project Proposal:\\ Hardware Centered Graph Rewiring}} \par}
+        {\large \vspace*{15mm}}
+        \bgroup
+        \def\arraystretch{1.2}%
+        \begin{tabular}{l l}
+            % Group Number:          & 16 \\
+            Candidate Number:      & 1053586\\
+            Name: & Marcel R\o d \\
+            Department Supervisor: & Prof.\ Michael Bronstein \\
+            % Paper Title: & Hardware  \\
+            GitHub Repository: & \href{https://github.com/marcelroed/msc-thesis}{https://github.com/marcelroed/msc-thesis} \\
+            % Lecturers: & Jotun Hein \\
+            Submission Date: & \today \\
+            % Word Count: & 4,993\\
+        \end{tabular}
+        \egroup
+    \end{center}
+    \vfill\null}
+
+
+% Document
+\begin{document}
+    \maketitle
+    \clearpage
+    \section*{Background}
+    My MSc project is currently titled \textit{Hardware Centric Graph Rewiring} (working title), and is about finding the best way to do graph rewiring on graph neural networks.
+    To optimize for performance not only in terms of the evaluation metrics but also in terms of runtime and training performance on hardware, the idea is to determine some suitable heuristic for local properties of the graphs, and repeatedly perform local updates to improve these properties.
+
+    Michael Bronstein is the supervisor of this project, and he has had students working on similar problems in the past.
+    A key paper on this topic is~\cite{toppingUnderstandingOversquashingBottlenecks2022} by Francesco Di Giovanni, a proof of concept showing that one can construct and optimize for a local property, namely the curvature of the graph, by using a local update rule.
+    Since curvature is a measure that corresponds well with over-squashing, this approach was used to improve evaluation metrics on the graphs.
+
+    Discussions are still ongoing, but the plan is to collaborate with Francesco di Giovanni and Thomas Markovic, both currently at Twitter.
+    Francesco has experience with using differential geometry (specifically Ricci flows) on graphs and thereby graph neural networks, and has worked on similar problems in the past.
+    Thomas also works on graph neural networks but has a background in quantum chemistry, a domain on which our approach is likely to be applicable.
+    Thomas' background in physics could also aid in developing a physics-inspired approach to graph rewiring, for example by representing the hardware runtime cost as an energy function that should be minimized.
+
+    \section*{Proposed Research}
+    \subsection*{Ideas}
+    Different hardware architectures have constraints and strengths that favor certain graph topologies.
+    While there are already heuristics that can be used to optimize for neural network evaluation metrics (e.g.\ over-squashing), I was not able to find approaches that consider the underlying hardware as a deciding factor.
+    I want to formalize these constraints in a way that can be computed and optimized.
+
+    Most of the ideas for the project will need to be developed in the first phase of development with my collaborators and Prof.\ Bronstein.
+
+    \subsection*{Implementation}
+    I plan to implement all the architectures from scratch in a suitable framework for machine learning in order to have full control over what's happening.
+    In my opinion, the best tool for this job is Jax~\cite{jax2018github}, especially since I used this previously for projects in some other classes.
+    I already have a good understanding of Jax, and have implemented graph neural networks in it before.
+    Along with Jax I will use Equinox~\cite{kidger2021equinox} for model abstractions and Optax~\cite{optax2020github} gradient descent optimization.
+    For some implementations, specifically those that require neural ODEs (e.g.\ GRAND~\cite{chamberlainGRANDGraphNeural2021}) I will use Diffrax~\cite{kidgerNeuralDifferentialEquations2022}.
+
+    We have not yet settled on the best datasets to use, but likely I will generate some synthetic datasets with specific properties and topologies, and some molecular datasets for comparing performance to existing models.
+
+    \subsection*{Timeline}
+    A draft for a timeline for the project follows below.
+    The bold dates are compulsory, and the non-bold dates are suggestions for when I should be doing what.
+    
+    \begin{itemize}
+        \item \textbf{April \nth{25}}: Proposal due date
+        \item \textbf{May \nth{2}}: Deadline for submission of my miniproject in computational biology.
+              After this I will be able to do the thesis project 100\%.
+        \item \textbf{June \nth{3}}: Exam in Computational Game Theory.
+              I will likely take around 4 days to prepare and sit the exam.
+        \item Month of May: Work on literature review and surveying the field.
+              Begin work on theoretical parts of the project, discussing the development with collaborators and my supervisor.
+        \item Month of June: I will continue to work on theory, and I will work on implementation and experiments for the project, discussing with my collaborators and supervisor when needed.
+        \item Month of July: Work on implementation and experiments continues.
+        \item Month of August: I will be working on writing my thesis, constructing figures, and preparing the final report.
+        \item \textbf{August \nth{30}}: Submission deadline.
+        \item \textbf{September \nth{27}}: Viva voce.
+    \end{itemize}
+
+    \clearpage
+    \bibliography{main}
+    \bibliographystyle{plain}
+\end{document}

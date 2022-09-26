@@ -1,0 +1,36 @@
+%! Author = marcel
+%! Date = 16/08/2022
+
+% Preamble
+\documentclass[../main.tex]{subfiles}
+
+% Document
+\begin{document}
+    \chapter{Introduction}\label{ch:introduction}
+    With recents advances in deep learning, several domains have come ``reasonably close'' to being solved by various state-of-the-art architectures, in the sense that given a sufficient amount of training data the models are by far the best existing models for the problem.
+    For instance, for images, deep convolutional neural architectures~\cite{lecunGradientbasedLearningApplied1998} have long been the most successful, only recently being overtaken by the more flexible and scalable vision transformers~\cite{dosovitskiyImageWorth16x162021}.
+    Similarly, transformers~\cite{vaswaniAttentionAllYou2017} have been wildly successful on natural language tasks~\cite{brownLanguageModelsAre2020}.
+    The successes of these models have enabled applications anywhere they could be applicable.
+    For instance, image models have enabled thousands of applications, like reliable methods for facial recognition and climate modeling.
+    This success is not only due to the architectures being better suited to learning on their respective domains, but also due co-evolved hardware advancements.
+
+    Learning on graphs is in many ways a much harder problem than for images and text, the latter tasks being special cases of the former~\cite{bronsteinGeometricDeepLearning2021}.
+    The state-of-the-art methods for learning on
+    Many current neural architectures have issues performing on
+
+    \section{Motivation}\label{sec:motivation}
+    In current paradigms, standard approaches to constructing graph neural networks exhibit some properties that are exceptionally well evidenced, yet not entirely understood.
+    The problems of underreaching~\cite{alonBottleneckGraphNeural2021}, oversmoothing~\cite{chenMeasuringRelievingOversmoothing2019} and oversquashing~\cite{alonBottleneckGraphNeural2021, toppingUnderstandingOversquashingBottlenecks2022} show up repeatedly in literature about issues with Graph Neural Networks.
+    A key solution to underreaching and oversquashing is rewiring, but as we will see in further background studies, rewiring is highly non-trivial for several reasons and does not come without losses in other areas.
+    Arbitrary rewiring may contribute significantly to the performance of the neural network, yet introduces a large amount of computational cost.
+
+
+    \section{Achievements}\label{sec:achievements}
+    \begin{enumerate}
+        \item Definition and formalization Gradient Flow Framework (GRAFF) \todo{Is this different/new from the GRAFF paper?}
+        \item Perform analyses of the behavior of graph neural networks that can be described in terms of GRAFF \todo{are there novel results?}
+        \item Construct new extensions to GRAFF, allowing any generic energy function $\varepsilon$ to govern the flow of a graph neural network.
+        \item Define a fuzzy clustering energy function that incentivizes graph rewiring that performs well on specific hardware architectures.
+        \item Defining a metric and showing the robustness of this method for finding optimal rewirings.
+    \end{enumerate}
+\end{document}

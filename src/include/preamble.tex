@@ -1,0 +1,30 @@
+%! Author = marcel
+%! Date = 19/04/2022
+
+\documentclass[a4paper,nobind]{ociamthesis}
+
+
+% Packages
+\usepackage{subfiles}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,calc,external}
+\tikzexternalize[prefix=externalized/]
+\usepackage[outputdir=../out]{minted}
+\usepackage[acronym]{glossaries}
+\usepackage[giveninits=true]{biblatex}
+
+% Package options
+\graphicspath{{fig/}}
+% \addbibresource{references.bib}
+
+%\bibliography{main}
+%\bibliographystyle{plain}
+\addbibresource{main.bib}
+
+\providecommand*\propositionautorefname{Proposition}
+
+\input{include/macros}

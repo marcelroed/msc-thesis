@@ -1,0 +1,89 @@
+%! Author = marcel
+%! Date = 11/09/2022
+
+% Preamble
+\documentclass[../main.tex]{subfiles}
+
+% Document
+\begin{document}
+    \chapter{Method}\label{ch:method}
+
+    \section{Graph Neural Diffusion}\label{sec:graph-neural-diffusion}
+    Graph Neural Diffusion (GRAND)~\cite{chamberlainGRANDGraphNeural2021} is a method that sees graph neural networks as a discretization of an underlying PDE\@.
+
+    The diffusion equation applied to graphs can be written as
+    \begin{equation}
+        \parpar{u(x, t)}t = \div [\bm G(u(x, t), t)\nabla_x u(x, t)]\label{eq:graph-diffusion}
+    \end{equation}
+
+    \section{The Gradient Flow Framework}\label{sec:the-gradient-flow-framework}
+    The Gradient Flow Framework (GRAFF), was introduced in~\cite{digiovanniGraphNeuralNetworks2022} as a way to study the properties of MPNNs.
+    It is
+
+    \section{Machine Learning Hardware Architectures}\label{sec:machine-learning-hardware-architectures}
+    A major factor to the success of the great machine learning algorithms that are currently in use is their computational efficiency.
+    Operations like the convolution and matrix multiplies are highly compatible with hardware architectures that are already in use for other reasons.
+    Graphics processing units (GPUs) have been used as hardware accelerators for decades, and their massively parallel nature means that with few tweaks they are very capable of computing the transformations necessary for these machine learning processes.
+    The static relationship between input and output leads to a linear relationship between parallel compute capability and compute performance
+
+    \subsection{GNNs on Hardware}\label{subsec:gnns-on-hardware}
+    Graph neural networks are different, however, as the interactions between nodes are sparse and sporadic, defined by the edges of the graph between arbitrary node indices.
+    While this \textit{can} be expressed in the form of matrix multiplication on dense layers, this leads to incredibly sparse tensors and wasted computation while adding zeros.
+    In the message passing framework defined in \autoref{sec:message-passing-neural-networks}, we can deal with the sparsity of operations by \textit{scattering}.
+    Recall the MPNN equation defined in \autoref{eq:mpnn-message} and \autoref{eq:mpnn-update}.
+
+    \begin{align*}
+        m^{t+1}_v &= \sum_{w \in N(v)} M_t(h^t_v, h^t_w, e_{vw})\tag{\ref{eq:mpnn-message} revisited}\\
+        h^{t+1}_v &= U_t(h_v^t, m_v^{t + 1}),\tag{\ref{eq:mpnn-update} revisited}
+    \end{align*}
+
+    First, organize the data in a timestep into dense representations: Assume any edge in the graph must have edge features $e_{vw} \neq 0$.
+    We can then define our adjacency matrix
+
+    We can isolate the sparse operation in the message passing operation happening in \autoref{eq:mpnn-update} by factoring the
+
+    Representing the edge matrix as a sparse tensor using sparse operations
+    This shows up as the \t{scatter} operation in several frameworks~\cite{TorchTensorScatter, JaxLaxScatter}, which is the key operation to implementing most graph neural network architectures.
+    Using the code in \autoref{sec:benchmarking-scattered-and-dense-operations}
+
+
+    Now that
+
+    The accessible
+
+    \section{Inference Runtime Optimization}\label{sec:inference-runtime-optimization}
+    Using GRAFF we can optimize for features other than those that can be defined in a loss function
+
+    \subsection{Restricting Rewiring With an Energy Function}\label{subsec:runtime-energy}
+    \subsection{Fuzzy Clustering}\label{subsec:fuzzy-clustering}
+    In the algoritm described above we rely on a method of clustering the points defined by our positional encodings .
+    A further discussion of the runtime complexity and technical challenges of the fuzzy clustering algorithm can be found in \autoref{subsec:implementing-fuzzy-clustering}.
+
+    \subsubsection{Annealing to the Result}\label{subsubsec:annealing-to-the-result}
+    \todo{Add analysis of the annealing process (making the communication boundaries harder and harder during training time). }
+    \todo{Explain the scheduling of this parameter Jax somewhere else, similar to LR scheduling}
+
+
+    \subsection{Reordering}\label{subsec:dynamic-reordering}
+    As mentioned in \autoref{subsec:gnns-on-hardware}, arbitrary node ordering can lead to sparse matrices with poor access patterns for both reading and writing during compute.
+    Therefore, we apply a permutation matrix $P$ to the input, and since the graph neural network is node permutation equivariant, we can invert the permutation afterward by applying its transpose $P^\intercal$ (since $P^\intercal P = I, P^{-1} = P^\intercal$).
+
+    \begin{figure}
+        \centering
+        \tikzsetnextfilename{permute-adjacency}
+        \input{../../fig/03-method/permute-adjacency.tikz}
+        \caption{Even after clustering has finished, the adjacency matrix is unpredictable.
+        Traversing the neighbors of a node in the first matrix would require looking for
+        Reordering the nodes results in an almost block diagonal adjacency structure.
+        The }
+        \label{fig:block-diag-before-after}
+    \end{figure}
+
+
+
+    \section{Evaluation}\label{sec:evaluation}
+    Following the description of
+
+    \subsection{Hardware Modelling}\label{subsec:hardware-modelling}
+
+\end{document}

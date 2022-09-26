@@ -1,0 +1,28 @@
+\def\crest{{\includegraphics{title/beltcrest.pdf}}}
+\renewcommand{\maketitle}{%
+	\null
+		\renewcommand{\footnotesize}{\small}
+		\renewcommand{\footnoterule}{\relax}
+		\thispagestyle{empty}
+		\begin{center}
+			\vspace*{15mm}
+			{ \LARGE {\textsc{University of Oxford}} \par}
+			{\large \vspace*{4mm}}
+			{\large Department of Computer Science \par}
+			{\large \vspace*{10mm} {\crest \par} \vspace*{15mm}}
+			{ \LARGE {\bfseries {Topics in Computational Biology}} \par}
+			{\large \vspace*{15mm}}
+			\bgroup
+			\def\arraystretch{1.2}%
+			\begin{tabular}{l l}
+				% Group Number:          & 16 \\
+				Candidate Number:      & 1053586\\
+				Paper Title: & Biologically Plausible Neural Networks \\
+				GitHub Repository: & \href{https://github.com/marcelroed/compbio}{https://github.com/marcelroed/compbio} \\
+				Lecturers: & Jotun Hein \\
+				Submission Date: & \today \\
+				Word Count: & 4,993\\
+			\end{tabular}
+			\egroup
+		\end{center}
+		\vfill\null}

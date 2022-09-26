@@ -1,0 +1,33 @@
+%! Author = marcel
+%! Date = 24/09/2022
+
+% Preamble
+\documentclass[../main.tex]{subfiles}
+
+% Document
+\begin{document}
+\begin{appendices}
+    \chapter{Implementation Snippets}\label{ch:implementation-snippets}
+    While the code is available in the repository on GitHub, I have included some snippets of impelmentation in this appendix for reference in the rest of the thesis.
+    Some sections of code have been simplified in order to improve understandability, and for the full implementation please see the GitHub repository.
+
+    \section{Benchmarking Scattered and Dense Operations}\label{sec:benchmarking-scattered-and-dense-operations}
+    \begin{listing}[!ht]
+        \begin{minted}{python}
+@jax.jit
+def graph_cnn_operation(x_in, A, S, edge_list):
+    # x_in: (n_nodes, n_features)
+    # edge_list: (n_edges, 2)
+    messages = x_in @ A
+    self_messages = x_in @ S
+
+    x_out = self_messages.at[edge_list[1], :].add(messages[edge_list[0], :])
+    return x_out
+        \end{minted}
+        \caption{Test}
+        \label{lst:scatter}
+    \end{listing}
+\end{appendices}
+
+
+\end{document}
