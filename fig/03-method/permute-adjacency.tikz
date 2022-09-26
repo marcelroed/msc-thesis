@@ -1,0 +1,31 @@
+\begin{tikzpicture}
+    \matrix (A) [matrix of math nodes,
+    left delimiter = (,
+    right delimiter = )]
+        {
+        \node[orange]{1}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[orange]{1}; & \node[orange]{1}; & \node[black]{0}; & \node[orange]{1}; & \node[black]{0};\\
+        \node[black]{0}; & \node[cyan]{1}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[cyan]{1};\\
+        \node[black]{0}; & \node[black]{0}; & \node[blue]{1}; & \node[blue]{1}; & \node[black]{0}; & \node[black]{0}; & \node[blue]{1}; & \node[black]{0}; & \node[black]{0};\\
+        \node[black]{0}; & \node[black]{0}; & \node[blue]{1}; & \node[blue]{1}; & \node[black]{0}; & \node[black]{0}; & \node[blue]{1}; & \node[black]{0}; & \node[black]{0};\\
+        \node[orange]{1}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[orange]{1}; & \node[orange]{1}; & \node[black]{0}; & \node[orange]{1}; & \node[black]{0};\\
+        \node[orange]{1}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[orange]{1}; & \node[orange]{1}; & \node[black]{0}; & \node[orange]{1}; & \node[black]{0};\\
+        \node[black]{0}; & \node[black]{0}; & \node[blue]{1}; & \node[blue]{1}; & \node[black]{0}; & \node[black]{0}; & \node[blue]{1}; & \node[black]{0}; & \node[red]{1};\\
+        \node[orange]{1}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[orange]{1}; & \node[orange]{1}; & \node[black]{0}; & \node[orange]{1}; & \node[red]{1};\\
+        \node[black]{0}; & \node[cyan]{1}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[red]{1}; & \node[red]{1}; & \node[cyan]{1};\\
+    };
+    \matrix (B) [matrix of math nodes,
+    left delimiter = (,
+    right delimiter = )] at (8, 0)
+        {
+        \node[blue]{1}; & \node[blue]{1}; & \node[blue]{1}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0};\\
+        \node[blue]{1}; & \node[blue]{1}; & \node[blue]{1}; & \node[black]{0}; & \node[red]{1}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0};\\
+        \node[blue]{1}; & \node[blue]{1}; & \node[blue]{1}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0};\\
+        \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[cyan]{1}; & \node[cyan]{1}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0};\\
+        \node[black]{0}; & \node[red]{1}; & \node[black]{0}; & \node[cyan]{1}; & \node[cyan]{1}; & \node[black]{0}; & \node[black]{0}; & \node[red]{1}; & \node[black]{0};\\
+        \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[orange]{1}; & \node[orange]{1}; & \node[orange]{1}; & \node[orange]{1};\\
+        \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[orange]{1}; & \node[orange]{1}; & \node[orange]{1}; & \node[orange]{1};\\
+        \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[red]{1}; & \node[orange]{1}; & \node[orange]{1}; & \node[orange]{1}; & \node[orange]{1};\\
+        \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[black]{0}; & \node[orange]{1}; & \node[orange]{1}; & \node[orange]{1}; & \node[orange]{1};\\
+    };
+    \draw[-latex] ([xshift=10] A.east) -- node[above=3mm, align=center] {$P$} ([xshift=-10] B.west);
+\end{tikzpicture}
