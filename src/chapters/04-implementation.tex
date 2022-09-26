@@ -12,7 +12,7 @@
 
 
 
-    \section{}\label{sec:technical-hurdles}
+    \section{Frameworks}\label{sec:frameworks}
 
     \subsection{Choosing a framework}\label{subsec:choosing-a-framework}
     There are several possible choices for a method for
@@ -21,20 +21,37 @@
     Using Jax presents several advantages for the implementation of the neural architecture.
     While in some aspects the tooling is immature, the extensibility and raw speed of Jax has allowed for well optimized methods that are not easily available even in the more mature PyTorch.
 
+    \subsubsection{Equinox}\label{subsubsec:equinox}
+    \todo{Explain why Kidger's way of doing it works and what the consequences are of chosing Equinox vs something Flax/Haiku/Objax}
+
+    \subsubsection{Diffrax}\label{subsubsec:diffrax}
+    \todo{Go through some key features of Diffrax and why the solvers are good and fast. I have some understanding of the method of implementation as well, so might bring that up?}
+
+    \section{Energy Functions}\label{sec:energy-functions}
+    As described in our method
+
     \subsection{Fuzzy Clustering}\label{subsec:implementing-fuzzy-clustering}
-    The fuzzy clustering algorithm defined in \autoref{subsec:fuzzy-clustering} is
-    Clustering on highly parallel hardware like a GPU or TPU
+    The fuzzy clustering algorithm defined in \autoref{subsec:fuzzy-clustering} is implemented as an energy function\ldots
+
+    Clustering on highly parallel hardware like a GPU or TPU \todo{explain the runtime and space complexity of the method in use, and why KDTrees are theoretically optimal, but not in use}
+
+    \section{Gradient Flow}\label{sec:gradient-flow}
+    \todo{Explain how the gradient flow works and how the solver is in use}
 
 
     \section{Datasets}\label{sec:datasets}
     \subsection{Standard Datasets}\label{subsec:standard-datasets}
     In order to get some idea of how this method performs on real datasets
 
+    \todo{Run through all the datasets and what they contain, expected results, challenges, heterophily/homophily}
+
     \subsection{Synthetic Datasets}\label{subsec:synthetic-datasets}
     In addition, we construct some ideal and some adverserial datasets that show best and worst-case situations.
     In \autoref{ch:discussion} there's some in-depth discussion on results on these datasets and what they mean for the model as a whole.
 
     The HomophilicAberration dataset \ldots \todo{fill in details on how each dataset is constructed and motivate the construction}
+
+    \todo{Should probably also quickly implement other GNN architectures to be sure that I'm comparing apples to apples}
 
     \todo{Maybe move this to method?}
 

@@ -24,10 +24,11 @@ def graph_cnn_operation(x_in, A, S, edge_list):
     x_out = self_messages.at[edge_list[1], :].add(messages[edge_list[0], :])
     return x_out
         \end{minted}
-        \caption{Test}
+        \caption{First listing}
         \label{lst:scatter}
     \end{listing}
 \end{appendices}
+    \todo{There is more code than just that for the benchmarking...}
 
 
 \end{document}
